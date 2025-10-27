@@ -2,7 +2,7 @@
 
 ## Overview
 
-Commission Tracker es una plataforma SaaS profesional para el procesamiento de documentos financieros y seguimiento de comisiones con capacidades de extracción de datos impulsadas por IA.
+Commission Tracker is a professional SaaS platform for financial document processing and commission tracking with AI-powered data extraction capabilities.
 
 ## Level 1: System Context
 
@@ -40,16 +40,16 @@ graph TB
 ### System Context Description
 
 **Primary Users:**
-- **Insurance Agents**: Suben documentos de comisiones, revisan datos extraídos, configuran mapeos de campos
-- **Brokers**: Procesan múltiples documentos, generan reportes de comisiones, gestionan clientes
-- **Administrators**: Gestionan usuarios, configuran dominios permitidos, supervisan el sistema
+- **Insurance Agents**: Upload commission documents, review extracted data, configure field mappings
+- **Brokers**: Process multiple documents, generate commission reports, manage clients
+- **Administrators**: Manage users, configure allowed domains, supervise the system
 
 **External Dependencies:**
-- **Email Service (SMTP)**: Envío de códigos OTP y notificaciones
-- **AI Services**: Claude Document AI (extracción principal), Mistral (fallback), GPT-4 (operaciones de IA)
-- **Cloud Storage (GCS)**: Almacenamiento de archivos PDF y documentos procesados
-- **Database (PostgreSQL)**: Persistencia de datos de usuarios, empresas, extracciones y comisiones
-- **Redis Cache**: Gestión de sesiones y códigos OTP temporales
+- **Email Service (SMTP)**: OTP code delivery and notifications
+- **AI Services**: Claude Document AI (primary extraction), Mistral (fallback), GPT-4 (AI operations)
+- **Cloud Storage (GCS)**: PDF file storage and processed documents
+- **Database (PostgreSQL)**: User data, companies, extractions and commissions persistence
+- **Redis Cache**: Session management and temporary OTP storage
 
 ## Level 2: Container Diagram
 
@@ -112,30 +112,30 @@ graph TB
 **Frontend Container (Next.js Web App)**
 - **Technology**: Next.js 15, React 19, TypeScript, Tailwind CSS
 - **Responsibilities**: 
-  - Interfaz de usuario para carga de documentos
-  - Visualización de datos extraídos
-  - Gestión de mapeos de campos
-  - Reportes y dashboards
-  - Autenticación OTP
+  - User interface for document upload
+  - Extracted data visualization
+  - Field mapping management
+  - Reports and dashboards
+  - OTP authentication
 - **Key Components**: Dashboard, Carrier Management, Upload Zone, Table Editor
 
 **Backend Container (FastAPI Backend)**
 - **Technology**: FastAPI, Python 3.11+, SQLAlchemy, Pydantic
 - **Responsibilities**:
-  - API REST para operaciones CRUD
-  - Procesamiento de documentos con IA
-  - Autenticación y autorización
-  - WebSocket para actualizaciones en tiempo real
-  - Integración con servicios externos
+  - REST API for CRUD operations
+  - AI-powered document processing
+  - Authentication and authorization
+  - WebSocket for real-time updates
+  - External service integration
 - **Key Modules**: Auth, Extraction, Dashboard, Admin, WebSocket
 
 **Database Container (PostgreSQL)**
-- **Technology**: PostgreSQL con asyncpg
+- **Technology**: PostgreSQL with asyncpg
 - **Responsibilities**:
-  - Almacenamiento de datos de usuarios y empresas
-  - Metadatos de extracciones
-  - Configuraciones de mapeo de campos
-  - Datos de comisiones procesadas
+  - User and company data storage
+  - Extraction metadata
+  - Field mapping configurations
+  - Processed commission data
 - **Key Tables**: users, companies, statement_uploads, extractions, earned_commissions
 
 ## Level 3: Component Diagram - Backend API
@@ -200,23 +200,23 @@ graph TB
 ### Backend Component Descriptions
 
 **API Layer:**
-- **Auth API**: Manejo de autenticación OTP, login/logout, gestión de sesiones
-- **Extraction API**: Endpoints para procesamiento de documentos, extracción de tablas, mapeo de campos
-- **Dashboard API**: Estadísticas, reportes de comisiones, datos analíticos
-- **Admin API**: Gestión de usuarios, dominios permitidos, configuraciones del sistema
-- **WebSocket API**: Comunicación en tiempo real para progreso de extracciones
+- **Auth API**: OTP authentication handling, login/logout, session management
+- **Extraction API**: Document processing endpoints, table extraction, field mapping
+- **Dashboard API**: Statistics, commission reports, analytical data
+- **Admin API**: User management, allowed domains, system configurations
+- **WebSocket API**: Real-time communication for extraction progress
 
 **Service Layer:**
-- **Auth Service**: Lógica de autenticación, generación de JWT, validación de OTP
-- **Extraction Service**: Orquestación del procesamiento de documentos con múltiples servicios de IA
-- **Dashboard Service**: Cálculos de estadísticas, agregaciones de datos de comisiones
-- **Admin Service**: Gestión de usuarios, permisos, configuraciones
-- **WebSocket Service**: Gestión de conexiones WebSocket, notificaciones de progreso
+- **Auth Service**: Authentication logic, JWT generation, OTP validation
+- **Extraction Service**: Document processing orchestration with multiple AI services
+- **Dashboard Service**: Statistics calculations, commission data aggregations
+- **Admin Service**: User management, permissions, configurations
+- **WebSocket Service**: WebSocket connection management, progress notifications
 
 **AI Services:**
-- **Claude Service**: Extracción principal usando Claude Document AI (superior precisión)
-- **Mistral Service**: Extracción de respaldo usando Mistral Document AI
-- **GPT-4 Service**: Operaciones de IA para mapeo de campos, detección de tipos de plan
+- **Claude Service**: Primary extraction using Claude Document AI (superior accuracy)
+- **Mistral Service**: Fallback extraction using Mistral Document AI
+- **GPT-4 Service**: AI operations for field mapping, plan type detection
 
 ## Level 3: Component Diagram - Frontend
 
@@ -279,22 +279,22 @@ graph TB
 ### Frontend Component Descriptions
 
 **Pages:**
-- **Landing Page**: Página de inicio con autenticación OTP
-- **Dashboard Page**: Interfaz principal con estadísticas y navegación
-- **Upload Page**: Procesamiento de documentos con progreso en tiempo real
-- **Admin Page**: Gestión de usuarios y configuraciones (solo administradores)
+- **Landing Page**: Homepage with OTP authentication
+- **Dashboard Page**: Main interface with statistics and navigation
+- **Upload Page**: Document processing with real-time progress
+- **Admin Page**: User management and configurations (admin only)
 
 **Components:**
-- **Auth Components**: Formularios de login/registro con OTP
-- **Dashboard Components**: Tarjetas de estadísticas, gráficos, modales
-- **Upload Components**: Zona de carga, editor de tablas, mapeo de campos
-- **Carrier Components**: Gestión de transportistas, visualización de datos
-- **Table Components**: Editor de tablas, validación de datos
+- **Auth Components**: OTP login/registration forms
+- **Dashboard Components**: Statistics cards, charts, modals
+- **Upload Components**: Upload zone, table editor, field mapping
+- **Carrier Components**: Carrier management, data visualization
+- **Table Components**: Table editor, data validation
 
 **Context & State:**
-- **Auth Context**: Estado del usuario, permisos, autenticación
-- **Submission Context**: Estado de cargas, progreso de extracciones
-- **Theme Context**: Tema de la interfaz, preferencias de usuario
+- **Auth Context**: User state, permissions, authentication
+- **Submission Context**: Upload state, extraction progress
+- **Theme Context**: Interface theme, user preferences
 
 ## Level 4: Code Diagram - Authentication Flow
 
@@ -440,4 +440,4 @@ sequenceDiagram
 
 ---
 
-*Esta documentación C4 models proporciona una vista completa de la arquitectura del sistema Commission Tracker, desde el contexto del sistema hasta los detalles de implementación específicos.*
+*This C4 models documentation provides a comprehensive view of the Commission Tracker system architecture, from system context to specific implementation details.*
